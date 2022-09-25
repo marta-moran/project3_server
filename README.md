@@ -9,8 +9,7 @@ To run the app:
 
     $ npm run dev
 ***
-### Endpoints 📍️
-
+### Endpoints API 📍️
 
 Route | HTTP Verb | Description
 | -- | -- | -- |
@@ -23,7 +22,7 @@ Route | HTTP Verb | Description
 /| GET | Ver usuarios
 /:id | GET | Ver un usuario
 /:id/delete | GET | Borrar tu cuenta
-/users/:id/edit | POST | Editar tu usario
+/:id/edit | POST | Editar tu usario
 
 
 ### Despliegue 📦️
