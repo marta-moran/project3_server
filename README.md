@@ -14,13 +14,13 @@ To run the app:
 
 Route | HTTP Verb | Response | Description
 | -- | -- | -- |-- |
-/ | GET | Home
+/ | GET | | Home
 /signup | POST | | Crear una cuenta
 /login | POST | | Entrar a la aplicación con tu cuenta
 
 Route | HTTP Verb | Response |Description
 | -- | -- | -- |-- |
-/| GET | Ver usuarios
+/| GET | |Ver usuarios
 /:id | GET | |Ver un usuario
 /:id/delete | GET | | Borrar tu cuenta
 /:id/edit | POST | |Editar tu usario
