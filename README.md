@@ -21,7 +21,9 @@ Route | HTTP Verb | Response | Description
 Route | HTTP Verb | Response |Description
 | -- | -- | -- |-- |
 /| GET | |Ver usuarios
+/matches| GET | |Ver tus matches y chatear |
 /:id | GET | |Ver un usuario
+/:id/chat| GET | |Chatear con un usuario |
 /:id/delete | GET | | Borrar tu cuenta
 /:id/edit | POST | |Editar tu usario
 
