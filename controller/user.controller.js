@@ -65,7 +65,8 @@ const getPerson = (req, res, next) => {
         .then((user) => {
             console.log(user)
             res.status(200).json({ message: 'Todo Ok' })
-        }).catch(error => next(error))
+        })
+        .catch(error => next(error))
 }
 
 const updateProfile = (req, res, next) => {
