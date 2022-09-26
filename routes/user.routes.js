@@ -18,11 +18,11 @@ router.get('/:id', getPerson); /* Ver un usuario en concreto*/
 /**
  * PUT
  */
-router.put('/:id', updateProfile); /* Actualizar tu usuario */
+router.put('/edit/:id', updateProfile); /* Actualizar tu usuario */
 
 /**
  * DELETE
  */
-router.delete('/:id', deleteProfile); /* Borrar tu cuenta */
+router.delete('/delete/:id', deleteProfile); /* Borrar tu cuenta */
 
 module.exports = router;
