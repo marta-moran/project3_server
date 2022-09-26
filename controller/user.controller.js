@@ -1,7 +1,5 @@
-const { isValidObjectId } = require('mongoose'); //propio de mongo
-
-const hasNumbers = require('../utils/hasNumbers')
-const hasSpecialCharacters = require('../utils/hasSpecialCharacters')
+const { isValidObjectId } = require('mongoose'); //propio de mongo. te comprueba que tenga la estructura de id
+const hasJustLetters = require('../utils/hasJustLetters')
 
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
@@ -11,8 +9,9 @@ const signUp = (req, res, next) => {
     //, age, gender, picture, preferences, description
     const { username, email, password } = req.body
 
-    if (hasNumbers(username) && hasSpecialCharacters(username)) {
+    if (hasJustLetters(username)) {
         console.log("no puede tener números y/o caracteres")
+        res.status(400).json({ message: "El nombre no puede contener números y/o caracteres" })
         return
     }
 
@@ -67,6 +66,12 @@ const getPerson = (req, res, next) => {
 const updateProfile = (req, res, next) => {
     const { username } = req.body
     console.log(req.body)
+    if (hasJustLetters(username)) {
+        console.log("no puede tener números y/o caracteres")
+        res.status(400).json({ message: "El nombre no puede contener números y/o caracteres" })
+        return
+    }
+
     User
         .findByIdAndUpdate(req.params.id, { username }, { new: true })
         .then((userUpdate) => {
