@@ -9,10 +9,6 @@ require("./db");
 // https://www.npmjs.com/package/express
 const express = require("express");
 
-// Handles the handlebars
-// https://www.npmjs.com/package/hbs
-const hbs = require("hbs");
-
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
@@ -29,7 +25,7 @@ const index = require("./routes/index.routes");
 app.use("/api", index);
 
 const user = require("./routes/user.routes");
-app.use("/api/user/", user);
+app.use("/api/user", user);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
