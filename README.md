@@ -14,7 +14,6 @@ To run the app:
 
 Route | HTTP Verb | Response | Description
 | -- | -- | -- |-- |
-/ | GET | | Home
 /signup | POST | | Crear una cuenta
 /login | POST | | Entrar a la aplicación con tu cuenta
 
@@ -22,10 +21,12 @@ Route | HTTP Verb | Response |Description
 | -- | -- | -- |-- |
 /| GET | |Ver usuarios
 /matches| GET | |Ver tus matches y chatear |
+/:id/like | GET | | Añadir like a usuario
+/:id/dislike | DELETE | | Eliminar like/match de usuario
 /:id | GET | |Ver un usuario
 /:id/chat| GET | |Chatear con un usuario |
-/:id/delete | GET | | Borrar tu cuenta
-/:id/edit | POST | |Editar tu usario
+/:id/delete | DELETE | | Borrar tu cuenta
+/:id/edit | PUT | |Editar tu usario
 
 
 ### Despliegue 📦️
