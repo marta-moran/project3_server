@@ -21,8 +21,8 @@ Route | HTTP Verb | Response |Description
 | -- | -- | -- |-- |
 /api/user/| GET | |Ver usuarios
 /api/user/matches| GET | |Ver tus matches y chatear |
-/api/user/:id/like | GET | | Añadir like a usuario
-/api/user/:id/dislike | DELETE | | Eliminar like/match de usuario
+/api/user/like/:id | GET | | Añadir like a usuario
+/api/user/dislike/:id | DELETE | | Eliminar like/match de usuario
 /api/user/:id | GET | |Ver un usuario
 /api/user/chat/:id| GET | |Chatear con un usuario |
 /api/user/delete/:id | DELETE | | Borrar tu cuenta
