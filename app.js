@@ -9,10 +9,13 @@ require("./db");
 // https://www.npmjs.com/package/express
 const express = require("express");
 
+<<<<<<< HEAD
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
 
 
+=======
+>>>>>>> 4addfa6fc20f17dd295cc6c0f316228b1b977b27
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware

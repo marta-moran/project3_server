@@ -5,7 +5,10 @@ const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4addfa6fc20f17dd295cc6c0f316228b1b977b27
 const signUp = (req, res, next) => {
     //, age, gender, picture, preferences, description
     const { username, email, password } = req.body
@@ -63,18 +66,26 @@ const getPeople = (req, res, next) => {
 }
 
 const getPerson = (req, res, next) => {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4addfa6fc20f17dd295cc6c0f316228b1b977b27
     User.findById(req.params.id)
         .then((user) => {
             console.log(user)
             res.status(200).json({ message: 'Todo Ok' })
+<<<<<<< HEAD
         }).catch(error => next(error))
 
+=======
+        })
+        .catch(error => next(error))
+>>>>>>> 4addfa6fc20f17dd295cc6c0f316228b1b977b27
 }
 
 const updateProfile = (req, res, next) => {
     const { username } = req.body
-    console.log(req.body)
+
     if (hasJustLetters(username)) {
         console.log("no puede tener números y/o caracteres")
         res.status(400).json({ message: "El nombre no puede contener números y/o caracteres" })
@@ -82,10 +93,15 @@ const updateProfile = (req, res, next) => {
     }
 
     User
-        .findByIdAndUpdate(req.params.id, { username }, { new: true })
+        .findByIdAndUpdate(req.params.id, { username })
         .then((userUpdate) => {
             console.log(userUpdate)
-            res.status(200).json({ message: `${username} actualizado` })
+
+            if (userUpdate === null) {
+                res.status(404).json({ message: `No existe` })
+            } else {
+                res.status(200).json({ message: `${username} actualizado` })
+            }
         })
         .catch((err) => {
             console.log(err)
