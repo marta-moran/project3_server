@@ -5,12 +5,6 @@ const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10
 
-const hasNumbers = require('../utils/hasNumbers')
-const hasSpecialCharacters = require('../utils/hasSpecialCharacters')
-
-const User = require('../models/user.model');
-const bcrypt = require('bcryptjs');
-const saltRounds = 10
 
 const signUp = (req, res, next) => {
     //, age, gender, picture, preferences, description
@@ -65,11 +59,16 @@ const login = (req, res, next) => {
 }
 
 const getPeople = (req, res, next) => {
+
 }
 
 const getPerson = (req, res, next) => {
 
-
+    User.findById(req.params.id)
+        .then((user) => {
+            console.log(user)
+            res.status(200).json({ message: 'Todo Ok' })
+        }).catch(error => next(error))
 
 }
 
