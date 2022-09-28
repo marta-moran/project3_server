@@ -17,6 +17,8 @@ const favicon = require("serve-favicon");
 // https://www.npmjs.com/package/path
 const path = require("path");
 
+const cors = require("cors");
+
 // Middleware configuration
 module.exports = (app) => {
   // In development environment the app logs
@@ -26,6 +28,12 @@ module.exports = (app) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
+  app.use(
+    cors({
+      credentials: true,
+      origin: process.env.ORIGIN || "http://localhost:3000",
+    })
+  );
 
   // Normalizes the path to the views folder
 };

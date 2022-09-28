@@ -5,13 +5,9 @@ const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4addfa6fc20f17dd295cc6c0f316228b1b977b27
 const signUp = (req, res, next) => {
     //, age, gender, picture, preferences, description
-    const { username, email, password } = req.body
+    const { username, email, password, age, gender, picture, description, preferences } = req.body
 
     if (hasJustLetters(username)) {
         console.log("no puede tener números y/o caracteres")
@@ -23,7 +19,7 @@ const signUp = (req, res, next) => {
         bcrypt
             .genSalt(saltRounds)
             .then(salt => bcrypt.hash(password, salt))
-            .then(hashedPassword => User.create({ username, password: hashedPassword, email }))
+            .then(hashedPassword => User.create({ username, password: hashedPassword, email, age, gender, picture, description, preferences }))
             .then((createdUser) => {
                 console.log(createdUser)
                 res.status(200).json({ message: "Usuario creado" })
@@ -62,25 +58,21 @@ const login = (req, res, next) => {
 }
 
 const getPeople = (req, res, next) => {
-
+    User.find()
+        .then((users) => {
+            console.log(users)
+            res.status(200).json({ message: 'Todo bien' })
+        })
+        .catch(error => next(error))
 }
 
 const getPerson = (req, res, next) => {
-<<<<<<< HEAD
-
-=======
->>>>>>> 4addfa6fc20f17dd295cc6c0f316228b1b977b27
     User.findById(req.params.id)
         .then((user) => {
             console.log(user)
             res.status(200).json({ message: 'Todo Ok' })
-<<<<<<< HEAD
-        }).catch(error => next(error))
-
-=======
         })
         .catch(error => next(error))
->>>>>>> 4addfa6fc20f17dd295cc6c0f316228b1b977b27
 }
 
 const updateProfile = (req, res, next) => {
