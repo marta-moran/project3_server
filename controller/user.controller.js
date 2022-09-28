@@ -1,5 +1,6 @@
 const { isValidObjectId } = require('mongoose'); //propio de mongo. te comprueba que tenga la estructura de id
 const hasJustLetters = require('../utils/hasJustLetters')
+const { signJwt } = require('../utils/jwt.util')
 
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
@@ -43,6 +44,7 @@ const login = (req, res, next) => {
         .findOne({ email })
         .then(user => {
             if (!user) {
+                res.status(500).json({ message: "Usuario no registrado" })
                 console.log("Usuario no registrado")
             } else if (bcrypt.compareSync(password, user.password) === false) {
                 // console.log('Usuario o contraseña incorrecta');
@@ -50,7 +52,7 @@ const login = (req, res, next) => {
                 return
             } else {
                 console.log("Hola", email)
-                res.status(200).json({ message: `Hola ${email}` })
+                res.status(200).json({ token: signJwt(user._id.toString(), user.email) });
             }
         })
         .catch(error => next(error))
@@ -116,6 +118,20 @@ const deleteProfile = (req, res, next) => {
 
 }
 
+const getUser = (req, res, next) => {
+    if (req.user) {
+        User.findById(req.user._id).select('email role username').then((user) => {
+            if (user) {
+                res.status(200).json(user)
+            } else {
+                res.sendStatus(404);
+            }
+        })
+    } else {
+        res.sendStatus(401);
+    }
+}
+
 module.exports = {
     signUp,
     login,
@@ -123,4 +139,5 @@ module.exports = {
     getPerson,
     updateProfile,
     deleteProfile,
+    getUser
 };
