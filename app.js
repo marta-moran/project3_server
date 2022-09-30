@@ -22,8 +22,8 @@ const projectName = "project3";
 app.locals.appTitle = `${capitalized(projectName)} created with IronLauncher`;
 
 // 👇 Start handling routes here
-const index = require("./routes/index.routes");
-app.use("/api", index);
+const auth = require("./routes/auth.routes");
+app.use("/api", auth);
 
 const user = require("./routes/user.routes");
 app.use("/api/user", validateToken, user);
