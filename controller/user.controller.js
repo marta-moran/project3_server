@@ -70,18 +70,42 @@ const deleteProfile = (req, res, next) => {
 
 const getUser = (req, res, next) => {
     if (req.user) {
-        User.findById(req.user._id).select('email role username').then((user) => {
-            if (user) {
-                res.status(200).json(user)
-            } else {
-                res.sendStatus(404);
-            }
-        })
+        User.findById(req.user._id).select('email role username')
+            .then((user) => {
+                if (user) {
+                    res.status(200).json(user)
+                } else {
+                    res.sendStatus(404);
+                }
+            })
     } else {
         res.sendStatus(401);
     }
 }
 
+const like = (req, res, next) => {
+    const { _id } = req.body
+    console.log(_id)
+
+    User.findByIdAndUpdate(_id, { $push: { likes: req.params.id } }, { new: true })
+        .then(userUpdate => {
+            console.log(userUpdate)
+            res.status(200).json(userUpdate)
+        })
+        .catch((err) => {
+            if (err.code === 11000) {
+                res.status(400).json({ message: "No se ha podido actualizar el usuario" })
+            } else {
+                next(err);
+            }
+        })
+
+}
+
+const dislike = (req, res, next) => {
+
+
+}
 
 module.exports = {
     getPeople,
@@ -89,4 +113,6 @@ module.exports = {
     updateProfile,
     deleteProfile,
     getUser,
+    like,
+    dislike
 };
