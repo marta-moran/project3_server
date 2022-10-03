@@ -5,27 +5,20 @@ const {
     getPerson,
     updateProfile,
     deleteProfile,
-    getUser
+    getUser,
+    like
 } = require('../controller/user.controller');
 
 router.get('/me', getUser)
 
-/**
- * GET
- */
 router.get('/', getPeople); /* Saca a los usuarios, habrá que sacar usuarios de uno en uno*/
 
 router.get('/:id', getPerson); /* Ver un usuario en concreto*/
 
-
-/**
- * PUT
- */
 router.put('/edit/:id', updateProfile); /* Actualizar tu usuario */
 
-/**
- * DELETE
- */
+router.put('/like/:id', like); /* Actualizar tu usuario */
+
 router.delete('/delete/:id', deleteProfile); /* Borrar tu cuenta */
 
 
