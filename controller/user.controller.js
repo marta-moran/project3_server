@@ -62,8 +62,7 @@ const login = (req, res, next) => {
 const getPeople = (req, res, next) => {
     User.find()
         .then((users) => {
-            console.log(users)
-            res.status(200).json({ message: 'Todo bien' })
+            res.status(200).json(users)
         })
         .catch(error => next(error))
 }
