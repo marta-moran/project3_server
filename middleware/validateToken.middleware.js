@@ -8,7 +8,7 @@ const validateToken = (req, res, next) => {
         const { sub, email } = verifyJwt(token);
         req.user = { _id: sub, email };
     } else {
-        res.sendStatus(401);
+        res.status(401).json({ message: "no tienes acceso" });
         return;
     }
 

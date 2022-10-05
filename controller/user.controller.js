@@ -1,10 +1,14 @@
 const { isValidObjectId } = require('mongoose'); //propio de mongo. te comprueba que tenga la estructura de id
 const hasJustLetters = require('../utils/hasJustLetters')
 const User = require('../models/user.model');
+const MatchModel = require('../models/match.model')
 
 
 const getPeople = (req, res, next) => {
-    User.find()
+    console.log(req.user._id)
+    console.log(req.user.email)
+    // req.user._id && (extra: find user loggedIn user.dislike && user.likes)
+    User.find({ _id: { $ne: req.user._id } })
         .then((users) => {
             console.log(users)
             res.status(200).json(users)
@@ -29,7 +33,7 @@ const updateProfile = (req, res, next) => {
         res.status(400).json({ message: "El nombre no puede contener números y/o caracteres" })
         return
     }
-
+    // req.user._id
     User
         .findByIdAndUpdate(req.params.id, { username })
         .then((userUpdate) => {
@@ -59,11 +63,7 @@ const deleteProfile = (req, res, next) => {
             res.status(200).json({ message: `Se ha borrado el usuario` })
         })
         .catch((err) => {
-            if (err.code === 11000) {
-                res.status(400).json({ message: "No se ha podido borrar el usuario" })
-            } else {
-                next(err);
-            }
+            next(err)
         })
 
 }
@@ -84,27 +84,64 @@ const getUser = (req, res, next) => {
 }
 
 const like = (req, res, next) => {
-    const { _id } = req.body
-    console.log(_id)
 
-    User.findByIdAndUpdate(_id, { $push: { likes: req.params.id } }, { new: true })
-        .then(userUpdate => {
-            console.log(userUpdate)
-            res.status(200).json(userUpdate)
-        })
-        .catch((err) => {
-            if (err.code === 11000) {
-                res.status(400).json({ message: "No se ha podido actualizar el usuario" })
-            } else {
-                next(err);
-            }
-        })
+    if (req.user) {
+        User.findByIdAndUpdate(req.user._id, { $addToSet: { likes: req.params.id } }, { new: true })
+            .then(userUpdate => {
+                console.log(userUpdate)
+                res.status(200).json(userUpdate)
+            })
+            .catch((err) => {
+                if (err.code === 11000) {
+                    res.status(400).json({ message: "No se han podido actualizar los likes del usuario" })
+                } else {
+                    next(err);
+                }
+            })
+
+    }
 
 }
 
 const dislike = (req, res, next) => {
 
+    if (req.user) {
+        User.findByIdAndUpdate(req.user._id, { $addToSet: { dislikes: req.params.id } }, { new: true })
+            .then(userUpdate => {
+                console.log(userUpdate)
+                res.status(200).json(userUpdate)
+            })
+            .catch((err) => {
+                if (err.code === 11000) {
+                    res.status(400).json({ message: "No se han podido actualizar los dislikes del usuario" })
+                } else {
+                    next(err);
+                }
+            })
+    }
 
+}
+
+const match = async (req, res, next) => {
+    try {
+        const { user2 } = req.body
+        const userFind = await User.findOne({ likes: { $in: [req.user._id] }, _id: user2 })
+        if (userFind) {
+            const matchData = await MatchModel.create({ users: [req.user._id, user2] })
+            const match = matchData._id
+            await User.findByIdAndUpdate(req.user._id, { $addToSet: { matches: match } }, { new: true })
+            await User.findByIdAndUpdate(user2, { $addToSet: { matches: match } }, { new: true })
+            // res.status(201).json({ message: '-----------------------ok--------------------------    ' })
+            res.status(201).json({ message: "MATCH" })
+            // return true
+        } else {
+            console.log("has fallao")
+            res.status(200).json();
+        }
+
+    } catch (error) {
+        next(error)
+    }
 }
 
 module.exports = {
@@ -114,5 +151,6 @@ module.exports = {
     deleteProfile,
     getUser,
     like,
-    dislike
+    dislike,
+    match
 };

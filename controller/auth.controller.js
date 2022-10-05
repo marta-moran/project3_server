@@ -8,7 +8,7 @@ const saltRounds = 10
 
 const signUp = (req, res, next) => {
     //, age, gender, picture, preferences, description
-    const { username, email, password, picture, age, gender, description, preferences } = req.body
+    const { username, email, password } = req.body
 
     if (hasJustLetters(username)) {
         console.log("no puede tener números y/o caracteres")
@@ -20,7 +20,7 @@ const signUp = (req, res, next) => {
         bcrypt
             .genSalt(saltRounds)
             .then(salt => bcrypt.hash(password, salt))
-            .then(hashedPassword => User.create({ username, password: hashedPassword, email, picture }))
+            .then(hashedPassword => User.create({ username, password: hashedPassword, email }))
             .then((createdUser) => {
                 console.log(createdUser)
                 res.status(200).json({ message: "Usuario creado" })

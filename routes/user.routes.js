@@ -6,7 +6,9 @@ const {
     updateProfile,
     deleteProfile,
     getUser,
-    like
+    like,
+    dislike,
+    match
 } = require('../controller/user.controller');
 
 router.get('/me', getUser)
@@ -18,6 +20,10 @@ router.get('/:id', getPerson); /* Ver un usuario en concreto*/
 router.put('/edit/:id', updateProfile); /* Actualizar tu usuario */
 
 router.put('/like/:id', like); /* Actualizar tu usuario */
+
+router.put('/dislike/:id', dislike); /* Actualizar tu usuario */
+
+router.put('/match', match);
 
 router.delete('/delete/:id', deleteProfile); /* Borrar tu cuenta */
 
