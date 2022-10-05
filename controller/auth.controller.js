@@ -9,7 +9,7 @@ const saltRounds = 10
 const signUp = (req, res, next) => {
     //, age, gender, picture, preferences, description
     const { username, email, password, picture, age, gender, description, preferences } = req.body
-
+    console.log(picture)
     if (hasJustLetters(username)) {
         console.log("no puede tener números y/o caracteres")
         res.status(400).json({ message: "El nombre no puede contener números y/o caracteres" })

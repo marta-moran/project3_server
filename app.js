@@ -21,6 +21,8 @@ app.use("/api", auth);
 const user = require("./routes/user.routes");
 app.use("/api/user", validateToken, user);
 
+
+
 require("./error-handling")(app);
 
 module.exports = app;
