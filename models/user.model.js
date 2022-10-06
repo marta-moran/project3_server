@@ -33,3 +33,4 @@ userSchema.index({ location: '2dsphere' });
 const User = model("users", userSchema);
 
 module.exports = User;
+

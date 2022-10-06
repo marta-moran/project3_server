@@ -1,7 +1,8 @@
 const { isValidObjectId } = require('mongoose'); //propio de mongo. te comprueba que tenga la estructura de id
 const hasJustLetters = require('../utils/hasJustLetters')
 const User = require('../models/user.model');
-const MatchModel = require('../models/match.model')
+const MatchModel = require('../models/match.model');
+const Match = require('../models/match.model');
 
 
 const getPeople = (req, res, next) => {
@@ -85,6 +86,26 @@ const getUser = (req, res, next) => {
     }
 }
 
+const viewMatch = (req, res, next) => {
+    if (req.user._id) {
+        console.log('holiiii---->>>', req.user._id)
+
+        User
+            .findById(req.user._id)
+            .populate('matches', 'users -_id')
+            .populate({
+                path: 'matches',
+                populate: {
+                    path: 'users'
+                }
+            })
+            .select('matches -_id')
+            .then(user => {
+                res.json(user)
+            })
+    }
+}
+
 const like = (req, res, next) => {
 
 
@@ -148,6 +169,8 @@ const match = async (req, res, next) => {
     }
 }
 
+
+
 module.exports = {
     getPeople,
     getPerson,
@@ -156,5 +179,6 @@ module.exports = {
     getUser,
     like,
     dislike,
-    match
+    match,
+    viewMatch
 };
