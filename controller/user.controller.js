@@ -3,17 +3,27 @@ const hasJustLetters = require('../utils/hasJustLetters')
 const User = require('../models/user.model');
 const MatchModel = require('../models/match.model')
 
-
+// { $and: [{ $nin: [ObjectId('6336fcd940cba04b93d073ec')] }, { $nin: [ObjectId('633ab358353e24e5968ad347')] }, { $ne: ObjectId('633d9df5b7973166a2a465f0')}] }
 const getPeople = (req, res, next) => {
     console.log(req.user._id)
     console.log(req.user.email)
     // req.user._id && (extra: find user loggedIn user.dislike && user.likes)
-    User.find({ _id: { $ne: req.user._id } })
+    User.findById(req.user._id)
+        .then((user) => {
+            return User.find({ $and: [{ _id: { $nin: user.likes.concat(user.dislikes) } }, { _id: { $ne: req.user._id } }] })
+        })
         .then((users) => {
             console.log(users)
             res.status(200).json(users)
         })
         .catch(error => next(error))
+
+    // User.find({ _id: { $ne: req.user._id } })
+    //     .then((users) => {
+    //         console.log(users)
+    //         res.status(200).json(users)
+    //     })
+
 }
 
 const getPerson = (req, res, next) => {
