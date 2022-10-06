@@ -22,7 +22,7 @@ const signUp = (req, res, next) => {
         bcrypt
             .genSalt(saltRounds)
             .then(salt => bcrypt.hash(password, salt))
-            .then(hashedPassword => User.create({ username, password: hashedPassword, email, age, gender, preferences, description }))
+            .then(hashedPassword => User.create({ username, password: hashedPassword, email, picture, age, gender, description, preferences }))
             .then((createdUser) => {
                 console.log(createdUser)
                 res.status(200).json({ message: "Usuario creado" })
