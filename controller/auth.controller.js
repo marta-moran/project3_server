@@ -13,7 +13,7 @@ const signUp = (req, res, next) => {
     //hacer condicion si no metes y/o decsripcion
 
     if (hasJustLetters(username)) {
-        console.log("no puede tener números y/o caracteres")
+        // console.log("no puede tener números y/o caracteres")
         res.status(400).json({ message: "El nombre no puede contener números y/o caracteres" })
         return
     }
@@ -24,11 +24,11 @@ const signUp = (req, res, next) => {
             .then(salt => bcrypt.hash(password, salt))
             .then(hashedPassword => User.create({ username, password: hashedPassword, email, picture, age, gender, description, preferences }))
             .then((createdUser) => {
-                console.log(createdUser)
+                // console.log(createdUser)
                 res.status(200).json({ message: "Usuario creado" })
             })
             .catch(error => {
-                console.log(error)
+                // console.log(error)
                 if (error.code === 11000) {
                     res.status(400).json({ message: "El usuario ya existe" })
                 } else {
@@ -41,19 +41,19 @@ const login = (req, res, next) => {
 
     const { email, password } = req.body;
 
-    console.log({ email, password })
+    // console.log({ email, password })
     User
         .findOne({ email })
         .then(user => {
             if (!user) {
                 res.status(500).json({ message: "Usuario no registrado" })
-                console.log("Usuario no registrado")
+                // console.log("Usuario no registrado")
             } else if (bcrypt.compareSync(password, user.password) === false) {
-                // console.log('Usuario o contraseña incorrecta');
+                // // console.log('Usuario o contraseña incorrecta');
                 res.status(400).json({ message: "Usuario o contraseña incorrecta" })
                 return
             } else {
-                console.log("Hola", email)
+                // console.log("Hola", email)
                 res.status(200).json({ token: signJwt(user._id.toString(), user.email) });
             }
         })

@@ -2,35 +2,25 @@ const { isValidObjectId } = require('mongoose'); //propio de mongo. te comprueba
 const hasJustLetters = require('../utils/hasJustLetters')
 const User = require('../models/user.model');
 const MatchModel = require('../models/match.model');
-const Match = require('../models/match.model');
 
-// { $and: [{ $nin: [ObjectId('6336fcd940cba04b93d073ec')] }, { $nin: [ObjectId('633ab358353e24e5968ad347')] }, { $ne: ObjectId('633d9df5b7973166a2a465f0')}] }
 const getPeople = (req, res, next) => {
-    console.log(req.user._id)
-    console.log(req.user.email)
-    // req.user._id && (extra: find user loggedIn user.dislike && user.likes)
+
     User.findById(req.user._id)
         .then((user) => {
             return User.find({ $and: [{ _id: { $nin: user.likes.concat(user.dislikes) } }, { _id: { $ne: req.user._id } }] })
         })
         .then((users) => {
-            console.log(users)
+            // // console.log(users)
             res.status(200).json(users)
         })
         .catch(error => next(error))
-
-    // User.find({ _id: { $ne: req.user._id } })
-    //     .then((users) => {
-    //         console.log(users)
-    //         res.status(200).json(users)
-    //     })
 
 }
 
 const getPerson = (req, res, next) => {
     User.findById(req.params.id)
         .then((user) => {
-            console.log(user)
+            // console.log(user)
             res.status(200).json(user)
         })
         .catch(error => next(error))
@@ -40,7 +30,7 @@ const updateProfile = (req, res, next) => {
     const { username, age, description, preferences } = req.body
 
     if (hasJustLetters(username)) {
-        console.log("no puede tener números y/o caracteres")
+        // console.log("no puede tener números y/o caracteres")
         res.status(400).json({ message: "El nombre no puede contener números y/o caracteres" })
         return
     }
@@ -57,7 +47,7 @@ const updateProfile = (req, res, next) => {
             }
         })
         .catch((err) => {
-            console.log(err)
+            // console.log(err)
             if (err.code === 11000) {
                 res.status(400).json({ message: "No se ha podido actualizar el usuario" })
             } else {
@@ -100,8 +90,6 @@ const getUser = (req, res, next) => {
 
 const viewMatch = (req, res, next) => {
     if (req.user._id) {
-        console.log('holiiii---->>>', req.user._id)
-
         User
             .findById(req.user._id)
             .populate('matches', 'users -_id')
@@ -122,7 +110,7 @@ const like = (req, res, next) => {
     if (req.user) {
         User.findByIdAndUpdate(req.user._id, { $addToSet: { likes: req.params.id } }, { new: true })
             .then(userUpdate => {
-                console.log(userUpdate)
+                // console.log(userUpdate)
                 res.status(200).json(userUpdate)
             })
             .catch((err) => {
@@ -142,7 +130,7 @@ const dislike = (req, res, next) => {
     if (req.user) {
         User.findByIdAndUpdate(req.user._id, { $addToSet: { dislikes: req.params.id } }, { new: true })
             .then(userUpdate => {
-                console.log(userUpdate)
+                // console.log(userUpdate)
                 res.status(200).json(userUpdate)
             })
             .catch((err) => {
@@ -167,7 +155,7 @@ const match = async (req, res, next) => {
             await User.findByIdAndUpdate(user2, { $addToSet: { matches: match } }, { new: true })
             res.status(201).json({ message: "MATCH" })
         } else {
-            console.log("has fallao")
+            // console.log("has fallao")
             res.status(200).json();
         }
 
