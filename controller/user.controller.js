@@ -26,7 +26,8 @@ const getPerson = (req, res, next) => {
 }
 
 const updateProfile = (req, res, next) => {
-    const { username } = req.body
+    const { username, age, description, preferences } = req.body
+    console.log('quiero verte a tiiiii', req.user.email)
 
     if (hasJustLetters(username)) {
         console.log("no puede tener números y/o caracteres")
@@ -35,9 +36,9 @@ const updateProfile = (req, res, next) => {
     }
     // req.user._id
     User
-        .findByIdAndUpdate(req.params.id, { username })
+        .findOneAndUpdate({ email: req.user.email }, { username, age, description, preferences })
         .then((userUpdate) => {
-            console.log(userUpdate)
+
 
             if (userUpdate === null) {
                 res.status(404).json({ message: `No existe` })
@@ -55,11 +56,12 @@ const updateProfile = (req, res, next) => {
         });
 }
 
+
 const deleteProfile = (req, res, next) => {
 
-    User.findByIdAndDelete(req.params.id)
+    User.findOneAndDelete({ email: req.user.email })
         .then((deleteUser) => {
-            console.log(deleteUser)
+
             res.status(200).json({ message: `Se ha borrado el usuario` })
         })
         .catch((err) => {
@@ -84,6 +86,8 @@ const getUser = (req, res, next) => {
 }
 
 const like = (req, res, next) => {
+
+
 
     if (req.user) {
         User.findByIdAndUpdate(req.user._id, { $addToSet: { likes: req.params.id } }, { new: true })
