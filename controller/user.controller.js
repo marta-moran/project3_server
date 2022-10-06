@@ -27,7 +27,6 @@ const getPerson = (req, res, next) => {
 
 const updateProfile = (req, res, next) => {
     const { username, age, description, preferences } = req.body
-    console.log('quiero verte a tiiiii', req.user.email)
 
     if (hasJustLetters(username)) {
         console.log("no puede tener números y/o caracteres")
@@ -36,7 +35,7 @@ const updateProfile = (req, res, next) => {
     }
     // req.user._id
     User
-        .findOneAndUpdate({ email: req.user.email }, { username, age, description, preferences })
+        .findByIdAndUpdate(req.user._id, { username, age, description, preferences })
         .then((userUpdate) => {
 
 
@@ -59,10 +58,9 @@ const updateProfile = (req, res, next) => {
 
 const deleteProfile = (req, res, next) => {
 
-    User.findOneAndDelete({ email: req.user.email })
+    User.findByIdAndDelete(req.user._id)
         .then((deleteUser) => {
-
-            res.status(200).json({ message: `Se ha borrado el usuario` })
+            res.status(200).json({ message: `Se ha borrado el usuario ${deleteUser}` })
         })
         .catch((err) => {
             next(err)
@@ -80,15 +78,16 @@ const getUser = (req, res, next) => {
                     res.sendStatus(404);
                 }
             })
+            .catch((err) => {
+                next(err)
+            })
+
     } else {
         res.sendStatus(401);
     }
 }
 
 const like = (req, res, next) => {
-
-
-
     if (req.user) {
         User.findByIdAndUpdate(req.user._id, { $addToSet: { likes: req.params.id } }, { new: true })
             .then(userUpdate => {
@@ -135,9 +134,7 @@ const match = async (req, res, next) => {
             const match = matchData._id
             await User.findByIdAndUpdate(req.user._id, { $addToSet: { matches: match } }, { new: true })
             await User.findByIdAndUpdate(user2, { $addToSet: { matches: match } }, { new: true })
-            // res.status(201).json({ message: '-----------------------ok--------------------------    ' })
             res.status(201).json({ message: "MATCH" })
-            // return true
         } else {
             console.log("has fallao")
             res.status(200).json();

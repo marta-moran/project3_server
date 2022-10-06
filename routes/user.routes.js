@@ -17,7 +17,6 @@ router.get('/me', getUser)
 
 router.get('/', getPeople); /* Saca a los usuarios, habrá que sacar usuarios de uno en uno*/
 
-
 router.put('/profile/edit', validateToken, updateProfile); /* Actualizar tu usuario */
 
 router.delete('/profile/delete', deleteProfile); /* Borrar tu cuenta */
