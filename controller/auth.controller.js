@@ -8,7 +8,7 @@ const saltRounds = 10
 
 const signUp = (req, res, next) => {
     //, age, gender, picture, preferences, description
-    const { username, email, password, age, gender, description, preferences } = req.body
+    const { username, email, password, age, gender, description, preferences, picture } = req.body
 
     //hacer condicion si no metes y/o decsripcion
 

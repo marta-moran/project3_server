@@ -27,7 +27,7 @@ const getPerson = (req, res, next) => {
 }
 
 const updateProfile = (req, res, next) => {
-    const { username, age, description, preferences } = req.body
+    const { username, age, description, preferences, picture } = req.body
 
     if (hasJustLetters(username)) {
         console.log("no puede tener números y/o caracteres")
@@ -36,13 +36,14 @@ const updateProfile = (req, res, next) => {
     }
     // req.user._id
     User
-        .findByIdAndUpdate(req.user._id, { username, age, description, preferences })
+        .findByIdAndUpdate(req.user._id, { username, age, description, preferences, picture })
         .then((userUpdate) => {
 
 
             if (userUpdate === null) {
                 res.status(404).json({ message: `No existe` })
             } else {
+                console.log('SE ACTUALIZÓ CHÉVERE!!!')
                 res.status(200).json({ message: `${username} actualizado` })
             }
         })
