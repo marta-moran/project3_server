@@ -10,7 +10,7 @@ const getPeople = (req, res, next) => {
             return User.find({ $and: [{ _id: { $nin: user.likes.concat(user.dislikes) } }, { _id: { $ne: req.user._id } }] })
         })
         .then((users) => {
-            // // console.log(users)
+
             res.status(200).json(users)
         })
         .catch(error => next(error))
