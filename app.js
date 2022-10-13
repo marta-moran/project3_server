@@ -17,7 +17,7 @@ const socketio = require('socket.io')
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000"
+        origin: process.env.ORIGIN
     },
 });
 
@@ -43,22 +43,6 @@ io.on('connection', socket => {
     //ruta en la que tu como usuario mandas un mensaje y la id del match y te guarda el mensaje. Después de eso haces un emit del mensaje
 
 })
-
-
-// io.on('connection', (socket) => {
-//     socket.on("login", ({name, room}, callback) => {
-
-//     })
-//     socket.on("sendMessage", message => {
-
-//     })
-//     socket.on("disconnect", () => {
-
-//     })
-//   })
-
-
-
 
 require("./config")(app);
 
