@@ -4,8 +4,9 @@ const matchSchema = new Schema(
     {
         users: [{ type: Schema.Types.ObjectId, ref: 'users' }],
         messages: [{
-            owner: { type: Schema.Types.ObjectId, ref: 'users' },
-            text: { type: String }
+            author: { type: String },
+            text: { type: String },
+            time: { type: String }
         }] // owner ( extra: createdAt default) 
     },
     {

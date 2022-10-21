@@ -104,6 +104,10 @@ const viewMatch = (req, res, next) => {
             .then(user => {
                 res.json(user)
             })
+            .catch((err) => {
+                next(err)
+            })
+
     }
 }
 
@@ -165,6 +169,26 @@ const match = async (req, res, next) => {
     }
 }
 
+const listMessages = (req, res, next) => {
+    console.log("id traido con axios ->", req.params.id)
+    MatchModel.findById(req.params.id)
+        .then(messages => {
+            res.status(200).json(messages)
+        })
+        .catch((err) => {
+            next(err)
+        })
+}
+
+const saveMessage = async (req, res, next) => {
+    try {
+        const { author, message, time } = req.body
+        await MatchModel.findByIdAndUpdate(req.params.id, { $push: { messages: { author: author, text: message, time: time } } }, { new: true })
+    } catch (error) {
+        next(error)
+    }
+}
+
 
 
 module.exports = {
@@ -176,5 +200,7 @@ module.exports = {
     like,
     dislike,
     match,
-    viewMatch
+    viewMatch,
+    listMessages,
+    saveMessage
 };

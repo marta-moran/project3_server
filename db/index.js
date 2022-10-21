@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost:5005/Tinder";
+const MONGO_URI = process.env.MONGODB_URI || "mongodb+srv://martamoran:hola123@cluster0.xxjpykt.mongodb.net/Pinter"
 
 mongoose
   .connect(MONGO_URI)

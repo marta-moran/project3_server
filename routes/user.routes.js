@@ -10,12 +10,18 @@ const {
     like,
     dislike,
     match,
-    viewMatch
+    viewMatch,
+    listMessages,
+    saveMessage
 } = require('../controller/user.controller');
 
 router.get('/me', getUser)
 
 router.get('/', getPeople); /* Saca a los usuarios, habrá que sacar usuarios de uno en uno*/
+
+router.get('/messages/:id', listMessages)
+
+router.put('/saveMessage/:id', saveMessage)
 
 router.put('/profile/edit', validateToken, updateProfile); /* Actualizar tu usuario */
 
@@ -30,8 +36,6 @@ router.put('/like/:id', like); /* Actualizar tu usuario */
 router.put('/dislike/:id', dislike); /* Actualizar tu usuario */
 
 router.put('/match', match);
-
-
 
 
 module.exports = router;
