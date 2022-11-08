@@ -23,18 +23,14 @@ Route | HTTP Verb | Response |Description
 | -- | -- | -- |-- |
 /api/me/| GET | | Verifica que exista jwt (json web token)
 /api/| GET | | Ver todas las personas que hay en la app para empezar a hacer matches
-
 /api/user/matches| GET | |Ver tus matches y chatear |
 /api/user/like/:id | GET | | Añadir like a usuario (para hacer match)
 /api/user/dislike/:id | DELETE | | No dar like a un usuario (para no hacer match)
-
-
 /api/user/:id | GET | |Ver un usuario en concreto
 /api/user/match| PUT | |Hacer match con otro usuario
 /api/user/chat/:id| GET | |Chatear con un usuario |
 /api/user/messages/:id | GET | Listar los mensajes de dos usuarios (almacenados en la BD)
 /api/user/saveMessage/:id | PUT | Guardar un mensaje de un usuario en la BD
-
 /api/user/profile/delete  | DELETE | | Borrar tu cuenta
 /api/user/profile/edit | PUT | |Editar tu usario
 
