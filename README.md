@@ -7,7 +7,7 @@ Instrucciones para obtener una copia del proyecto en funcionamiento en tu máqui
 ### Prerrequisitos 📋️
     $ npm install
 
-### To run the app 🚀
+### Para hacer funcionar la app 🚀
     $ npm run dev
     
 ### Endpoints API 📍️
@@ -18,6 +18,8 @@ Route | HTTP Verb | Response | Description
 | -- | -- | -- |-- |
 /api/signup | POST | | Crear una cuenta
 /api/login | POST | | Entrar a la aplicación con tu cuenta
+
+## USER ROUTES
 
 Route | HTTP Verb | Response |Description
 | -- | -- | -- |-- |
