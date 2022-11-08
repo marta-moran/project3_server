@@ -7,9 +7,9 @@ Instrucciones para obtener una copia del proyecto en funcionamiento en tu máqui
 ### Prerrequisitos 📋️
     $ npm install
 
-To run the app:
+### To run the app 🚀
     $ npm run dev
-***
+    
 ### Endpoints API 📍️
 
 Route | HTTP Verb | Response | Description
