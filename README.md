@@ -12,6 +12,8 @@ Instrucciones para obtener una copia del proyecto en funcionamiento en tu máqui
     
 ### Endpoints API 📍️
 
+## AUTH ROUTES 
+
 Route | HTTP Verb | Response | Description
 | -- | -- | -- |-- |
 /api/signup | POST | | Crear una cuenta
@@ -19,14 +21,24 @@ Route | HTTP Verb | Response | Description
 
 Route | HTTP Verb | Response |Description
 | -- | -- | -- |-- |
-/api/user/| GET | |Ver usuarios
+/api/me/| GET | | Verifica que exista jwt (json web token)
+/api/| GET | | Ver todas las personas que hay en la app para empezar a hacer matches
+
 /api/user/matches| GET | |Ver tus matches y chatear |
-/api/user/like/:id | GET | | Añadir like a usuario
-/api/user/dislike/:id | DELETE | | Eliminar like/match de usuario
-/api/user/:id | GET | |Ver un usuario
+/api/user/like/:id | GET | | Añadir like a usuario (para hacer match)
+/api/user/dislike/:id | DELETE | | No dar like a un usuario (para no hacer match)
+
+
+/api/user/:id | GET | |Ver un usuario en concreto
+/api/user/match| PUT | |Hacer match con otro usuario
 /api/user/chat/:id| GET | |Chatear con un usuario |
-/api/user/delete/:id | DELETE | | Borrar tu cuenta
-/api/user/edit/:id | PUT | |Editar tu usario
+/api/user/messages/:id | GET | Listar los mensajes de dos usuarios (almacenados en la BD)
+/api/user/saveMessage/:id | PUT | Guardar un mensaje de un usuario en la BD
+
+/api/user/profile/delete  | DELETE | | Borrar tu cuenta
+/api/user/profile/edit | PUT | |Editar tu usario
+
+
 
 
 ### Despliegue 📦️
