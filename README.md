@@ -29,8 +29,8 @@ Route | HTTP Verb | Response |Description
 /api/user/:id | GET | |Ver un usuario en concreto
 /api/user/match| PUT | |Hacer match con otro usuario
 /api/user/chat/:id| GET | |Chatear con un usuario |
-/api/user/messages/:id | GET | Listar los mensajes de dos usuarios (almacenados en la BD)
-/api/user/saveMessage/:id | PUT | Guardar un mensaje de un usuario en la BD
+/api/user/messages/:id | GET | |Listar los mensajes de dos usuarios (almacenados en la BD)
+/api/user/saveMessage/:id | PUT | | Guardar un mensaje de un usuario en la BD
 /api/user/profile/delete  | DELETE | | Borrar tu cuenta
 /api/user/profile/edit | PUT | |Editar tu usario
 
