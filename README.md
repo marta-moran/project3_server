@@ -35,16 +35,16 @@ Instrucciones para obtener una copia del proyecto en funcionamiento en tu máqui
 ### Para hacer funcionar la app 🚀
     $ npm run dev
     
-### Endpoints API 📍️
+## Endpoints API 📍️
 
-## AUTH ROUTES 
+### Rutas de autenticación
 
 Route | HTTP Verb | Response | Description
 | -- | -- | -- |-- |
 /api/signup | POST | | Crear una cuenta
 /api/login | POST | | Entrar a la aplicación con tu cuenta
 
-## USER ROUTES
+### Rutas de usuario
 
 Route | HTTP Verb | Response |Description
 | -- | -- | -- |-- |
@@ -62,10 +62,8 @@ Route | HTTP Verb | Response |Description
 /api/user/profile/edit | PUT | |Editar tu usario
 
 
-
-
-### Despliegue 📦️
+## Despliegue 📦️
 https://pinter-app.vercel.app/
 
-### Autores 🖊️
+## Autores 🖊️
 Héctor Villaescusa y Marta Morán
