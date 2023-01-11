@@ -1,8 +1,33 @@
 
 # Pinter
-Pinter es una aplicación de citas para gente que mira más alla del físico de las personas. En esta aplicación no te definirán tus fotos, si no el avatar que tú mismo/a dibujes. Podrás matchear con otras personas y chatear con ellas. 
+Pinter es una aplicación de citas para gente que mira más alla del físico de las personas. En esta aplicación no te definirán tus fotos, si no el avatar que tú mismo/a dibujes. Podrás matchear con otras personas y chatear con ellas.
+## Funcionalidades del proyecto 🔨
+- Dibujar el avatar de tu perfil
+- Hacer match con otros usuarios/as
+- Chatear con otros usarios/as
+- Listar tus matches
+
+## Tecnologías
+### Server side
+- NodeJS
+- ExpressJS
+- MongoDB
+- WebSockets (Socket.IO)
+
+### Client Side
+- React
+- JavaScript ES6
+- HTML5 y CSS
+- Axios
+- Canvas
+
+### Librerias utilizadas
+- React-Tinder-Cards
+- Canvas-draw
+- Confeti
+
 ## Comenzando 🚀️
-Instrucciones para obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
+Instrucciones para obtener una copia del proyecto en funcionamiento en tu máquina local para probarlo.
 
 ### Prerrequisitos 📋️
     $ npm install
